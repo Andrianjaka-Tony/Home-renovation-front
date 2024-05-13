@@ -1,0 +1,36 @@
+.sign-in-client {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .sign-in-client-form {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-items: flex-start;
+    gap: 40px;
+
+    .sign-in-client-form-title {
+      font-size: 1.2rem;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    .input {
+      --input-color: #111;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: -10px;
+    }
+  }
+
+  .form-link {
+    color: black;
+    text-decoration: none;
+    margin-top: -20px;
+  }
+}

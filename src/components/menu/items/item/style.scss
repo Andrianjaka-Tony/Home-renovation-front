@@ -1,0 +1,19 @@
+.item {
+  color: wheat;
+  text-decoration: none;
+  font-size: 66px;
+  letter-spacing: -0.25px;
+  height: fit-content;
+  opacity: 0.3;
+  transition: opacity 400ms;
+
+  &.active,
+  &:hover {
+    opacity: 1;
+  }
+
+  .name {
+    display: flex;
+    overflow: hidden;
+  }
+}

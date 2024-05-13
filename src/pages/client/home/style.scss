@@ -1,0 +1,27 @@
+.my-contracts {
+  .table {
+    .column.date {
+      min-width: initial;
+      width: 200px;
+    }
+
+    .column.timestamp {
+      min-width: initial;
+      width: 300px;
+    }
+
+    .column.house {
+      min-width: initial;
+      width: 350px;
+    }
+
+    .column.finishing {
+      min-width: initial;
+      width: 250px;
+    }
+  }
+
+  .btn {
+    width: 245px;
+  }
+}

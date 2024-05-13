@@ -1,0 +1,30 @@
+.items {
+  position: absolute;
+  top: 0;
+  width: 500px;
+  background: #111;
+  transform-origin: center top;
+  z-index: 10;
+
+  .close {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: wheat;
+    font-size: 24px;
+    margin-top: 5px;
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .items-container {
+    margin-top: 40px;
+    width: 100%;
+    padding-inline: 25px;
+    padding-bottom: 20px;
+  }
+}

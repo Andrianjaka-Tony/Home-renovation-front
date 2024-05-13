@@ -1,0 +1,43 @@
+.client-contract {
+  .client-contract-title {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .client-contract-houses {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+  .client-contract-finishings {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+
+  .input {
+    --input-color: #111;
+  }
+
+  .client-contract-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 60px;
+
+    .input {
+      width: 300px;
+      margin-top: 30px;
+      margin-bottom: 40px;
+
+      label {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.toast {
+  width: 400px;
+  background: #111;
+  position: fixed;
+  bottom: 10px;
+  padding: 20px;
+  color: wheat;
+  left: 50%;
+  border-radius: 15px;
+  transform-origin: center bottom;
+
+  .title {
+    font-size: 28px;
+  }
+
+  .text {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}

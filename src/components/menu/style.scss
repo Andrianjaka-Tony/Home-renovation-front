@@ -1,0 +1,27 @@
+.menu {
+  padding-block: 10px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  .menu-container {
+    position: relative;
+
+    .hamburger {
+      width: 60px;
+      aspect-ratio: 1 / 1;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: wheat;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+
+      svg {
+        opacity: 0.8;
+      }
+    }
+  }
+}

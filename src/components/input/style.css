@@ -1,0 +1,30 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  --input-color: wheat;
+
+  label {
+    font-size: 16px;
+    /* opacity: 0.4; */
+    color: var(--input-color);
+  }
+
+  input {
+    font-size: 16px;
+    height: 30px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px var(--input-color) solid;
+    outline: none;
+    background: transparent;
+    caret-color: var(--input-color);
+    color: var(--input-color);
+
+    &::placeholder {
+      opacity: 0.4;
+      color: var(--input-color);
+    }
+  }
+}

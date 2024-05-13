@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  // justify-content: center;
+  align-items: center;
+
+  .pagination-page {
+    height: 40px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 200ms, color 200ms;
+
+    &.active,
+    &:hover {
+      background: #111;
+      color: wheat;
+    }
+  }
+}

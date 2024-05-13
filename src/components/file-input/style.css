@@ -1,0 +1,26 @@
+.file-input {
+  width: 100%;
+  aspect-ratio: 2 / 1.2;
+  background: #222;
+  color: wheat;
+  border-radius: 10px;
+
+  label {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+
+    svg {
+      font-size: 60px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}

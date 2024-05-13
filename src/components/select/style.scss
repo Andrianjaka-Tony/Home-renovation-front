@@ -1,0 +1,25 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  --select-color: wheat;
+
+  label {
+    font-size: 16px;
+    // opacity: 0.4;
+    color: var(--select-color);
+  }
+
+  select {
+    font-size: 16px;
+    height: 30px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px var(--select-color) solid;
+    outline: none;
+    background: transparent;
+    caret-color: var(--select-color);
+    color: var(--select-color);
+  }
+}
