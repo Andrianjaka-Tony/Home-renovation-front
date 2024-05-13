@@ -2,34 +2,15 @@ import { useEffect, useState } from "react";
 import "./style.scss";
 import Input from "../../../components/input";
 import Button from "../../../components/button";
-import {
-  AiOutlineArrowRight,
-  AiOutlineDollar,
-  AiOutlineDownload,
-  AiOutlinePlus,
-} from "react-icons/ai";
 import { api } from "../../../helpers/api-helper";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Toast from "../../../components/toast";
-import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
+import { useParams } from "react-router-dom";
 import Transition from "../../../components/transition";
-import Payment from "./payement";
 import { formatPrice } from "../../../helpers/price-format-helper";
-import { Resolution, usePDF } from "react-to-pdf";
 
-function ClientContactById() {
+function ContractById() {
   const { id } = useParams();
 
-  const { toPDF, targetRef: ref } = usePDF({
-    filename: "devis.pdf",
-    resolution: Resolution.HIGH,
-  });
-
   const [contract, setContract] = useState(undefined);
-
-  const [updates, setUpdates] = useState(0);
-  const [isPayment, setPayment] = useState(false);
 
   const totalPrice = () => {
     let response = 0;
@@ -49,7 +30,7 @@ function ClientContactById() {
           setContract(contract);
         }
       });
-  }, [id, updates]);
+  }, [id]);
 
   return (
     <Transition>
@@ -59,7 +40,7 @@ function ClientContactById() {
           {contract && (
             <>
               <div className="client-contract-card">
-                <div className="label">Pirx total a payer</div>
+                <div className="label">Prix total a payer</div>
                 <div className="value">{formatPrice(contract.price)} Ar</div>
               </div>
               <div className="client-contract-card">
@@ -73,10 +54,9 @@ function ClientContactById() {
             </>
           )}
         </div>
-        <Button text="Paiement" icon={<AiOutlineDollar />} onClick={() => setPayment(true)} />
       </div>
       {contract && (
-        <div ref={ref} className="client-contract-by-id-pdf">
+        <div className="client-contract-by-id-pdf">
           <div className="pdf-section pdf-header">
             <p className="designation">Designation</p>
             <p className="unit">Unite</p>
@@ -109,14 +89,8 @@ function ClientContactById() {
           </div>
         </div>
       )}
-      <div className="pdf-download-link page">
-        <Button onClick={toPDF} text="Telecharger en pdf" icon={<AiOutlineDownload />} />
-      </div>
-      <AnimatePresence mode="wait">
-        {isPayment && <Payment id={id} setPayment={setPayment} setUpdates={setUpdates} />}
-      </AnimatePresence>
     </Transition>
   );
 }
 
-export default ClientContactById;
+export default ContractById;

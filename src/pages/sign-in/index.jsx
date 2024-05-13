@@ -11,8 +11,8 @@ import Toast from "../../components/toast";
 function SignIn() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("hello.world@gmail.com");
+  const [password, setPassword] = useState("helloworld");
 
   const [message, setMessage] = useState("");
 
@@ -31,9 +31,10 @@ function SignIn() {
       .then((response) => {
         const { status, message, data } = response;
         if (status == 200) {
-          const { role } = data;
+          const { role, token } = data;
           if (role.id == "ROLE01") {
-            navigate("/admin/units");
+            sessionStorage.setItem("storage-token", token);
+            navigate("/admin/dashboard");
           }
         } else {
           setMessage(message);

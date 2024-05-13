@@ -1,23 +1,34 @@
 import { useEffect, useState } from "react";
 import "./style.scss";
-import Input from "../../../components/input";
-import Button from "../../../components/button";
-import { AiOutlineArrowRight, AiOutlinePlus } from "react-icons/ai";
 import { api } from "../../../helpers/api-helper";
-import { Link, useNavigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Toast from "../../../components/toast";
+import { useNavigate } from "react-router-dom";
 import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 
-function ClientHome() {
+function Home() {
   const navigate = useNavigate();
 
   const [items, setItems] = useState([]);
 
+  const totalPrice = () => {
+    let response = 0;
+    items.forEach((item) => {
+      response += item.price;
+    });
+    return response;
+  };
+
+  const totalPayed = () => {
+    let response = 0;
+    items.forEach((item) => {
+      response += item.payed;
+    });
+    return response;
+  };
+
   useEffect(() => {
-    fetch(`${api}/api/client-contracts/${sessionStorage.getItem("client-contact")}`)
+    fetch(`${api}/api/client-contracts/current`)
       .then((response) => response.json())
       .then((response) => {
         const { data, status } = response;
@@ -31,11 +42,24 @@ function ClientHome() {
   return (
     <>
       <Transition>
-        <div className="my-contracts page">
-          <div className="page-title">Mes devis</div>
+        <div className="current-contracts page">
+          <div className="page-title">Devis en cours</div>
           <div style={{ marginTop: "50px" }}></div>
+          <div className="contract-header">
+            <>
+              <div className="contract-card">
+                <div className="label">Prix total</div>
+                <div className="value">{formatPrice(totalPrice())} Ar</div>
+              </div>
+              <div className="contract-card">
+                <div className="label">Paye</div>
+                <div className="value">{formatPrice(totalPayed())} Ar</div>
+              </div>
+            </>
+          </div>
           <div className="table">
             <div className="head">
+              <div className="column augmentation">Client</div>
               <div className="column date">Date</div>
               <div className="column timestamp">Debut des travaux</div>
               <div className="column timestamp">Fin des travaux</div>
@@ -46,6 +70,7 @@ function ClientHome() {
             </div>
             {items.map((item) => (
               <div onClick={() => navigate(`../contract/${item.id}`)} key={item.id} className="row">
+                <div className="column date">{item.client.contact}</div>
                 <div className="column date">{formatDate(item.date)}</div>
                 <div className="column timestamp">{formatTimestamp(item.begin)}</div>
                 <div className="column timestamp">{formatTimestamp(item.end)}</div>
@@ -56,15 +81,10 @@ function ClientHome() {
               </div>
             ))}
           </div>
-          <Button
-            text="Faire un nouveau devis"
-            icon={<AiOutlinePlus />}
-            onClick={() => navigate("../contract")}
-          />
         </div>
       </Transition>
     </>
   );
 }
 
-export default ClientHome;
+export default Home;

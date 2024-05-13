@@ -4,7 +4,7 @@ import Menu from "../components/menu";
 import ClientContract from "../pages/client/client-contract";
 import ClientHome from "../pages/client/home";
 import { AnimatePresence } from "framer-motion";
-import ClientContractById from "../pages/client/client-contract-by-id";
+import ClientContactById from "../pages/client/client-contract-by-id";
 
 const items = [
   {
@@ -19,13 +19,13 @@ function ClientRoute() {
   return (
     <>
       <Menu items={items} />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/home" element={<ClientHome />} />
-          <Route path="/contract" element={<ClientContract />} />
-          <Route path="/contract/:id" element={<ClientContractById />} />
-        </Routes>
-      </AnimatePresence>
+      {/* <AnimatePresence mode="wait"> */}
+      <Routes location={location} key={location.pathname}>
+        <Route path="/home" element={<ClientHome />} />
+        <Route path="/contract" element={<ClientContract />} />
+        <Route path="/contract/:id" element={<ClientContactById />} />
+      </Routes>
+      {/* </AnimatePresence> */}
     </>
   );
 }
