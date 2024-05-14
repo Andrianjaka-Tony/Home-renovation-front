@@ -1,0 +1,20 @@
+.work {
+  .table {
+    .column.id {
+      min-width: initial;
+      width: 150px;
+    }
+    .column.name {
+      min-width: initial;
+      width: 450px;
+    }
+    .column.price {
+      min-width: initial;
+      width: 250px;
+    }
+    .column.unit {
+      min-width: initial;
+      width: 200px;
+    }
+  }
+}

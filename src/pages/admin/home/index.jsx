@@ -28,7 +28,7 @@ function Home() {
   };
 
   useEffect(() => {
-    fetch(`${api}/api/client-contracts/current`)
+    fetch(`${api}/api/client-contracts`)
       .then((response) => response.json())
       .then((response) => {
         const { data, status } = response;
@@ -38,6 +38,18 @@ function Home() {
         }
       });
   }, []);
+
+  // useEffect(() => {
+  //   fetch(`${api}/api/client-contracts`)
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       const { data, status } = response;
+  //       if (status == 200) {
+  //         const { array } = data;
+  //         setItems(array);
+  //       }
+  //     });
+  // }, []);
 
   return (
     <>
@@ -64,6 +76,8 @@ function Home() {
               <div className="column timestamp">Debut des travaux</div>
               <div className="column timestamp">Fin des travaux</div>
               <div className="column price">Prix total</div>
+              <div className="column price">Paiements</div>
+              <div className="column price">Progression</div>
               <div className="column house">Maison</div>
               <div className="column finishing">Finition</div>
               <div className="column augmentation">Augmentation</div>
@@ -75,6 +89,8 @@ function Home() {
                 <div className="column timestamp">{formatTimestamp(item.begin)}</div>
                 <div className="column timestamp">{formatTimestamp(item.end)}</div>
                 <div className="column price">{formatPrice(item.price)} Ar</div>
+                <div className="column price">{formatPrice(item.payed)} Ar</div>
+                <div className="column price">{formatPrice((item.payed / item.price) * 100)} %</div>
                 <div className="column house">{item.house.name}</div>
                 <div className="column finishing">{item.finishingType.name}</div>
                 <div className="column augmentation">{item.finishingAugmentation}%</div>

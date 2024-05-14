@@ -2,20 +2,20 @@ import "./style.scss";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import Button from "../../components/button";
-import Transition from "../../components/transition";
+import Button from "../../../components/button";
+import Transition from "../../../components/transition";
 import List from "./list";
 import Save from "./save";
 import Modification from "./modification";
 
-function Work() {
+function FinishingType() {
   const [updates, setUpdates] = useState(0);
   const [isSave, setSave] = useState(false);
   const [modification, setModification] = useState(undefined);
 
   return (
     <Transition>
-      <div className="page">
+      <div className="finishing page">
         <List updates={updates} setModification={setModification} />
         <AnimatePresence mode="wait">
           {isSave && <Save setUpdates={setUpdates} setSave={setSave} />}
@@ -35,4 +35,4 @@ function Work() {
   );
 }
 
-export default Work;
+export default FinishingType;

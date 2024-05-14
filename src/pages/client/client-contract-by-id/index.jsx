@@ -31,6 +31,9 @@ function ClientContactById() {
   const [updates, setUpdates] = useState(0);
   const [isPayment, setPayment] = useState(false);
 
+  const [message, setMessage] = useState("");
+  const [isToast, setToast] = useState(false);
+
   const totalPrice = () => {
     let response = 0;
     contract.details.forEach(({ quantity, unitPrice }) => {
@@ -113,7 +116,18 @@ function ClientContactById() {
         <Button onClick={toPDF} text="Telecharger en pdf" icon={<AiOutlineDownload />} />
       </div>
       <AnimatePresence mode="wait">
-        {isPayment && <Payment id={id} setPayment={setPayment} setUpdates={setUpdates} />}
+        {isPayment && (
+          <Payment
+            setToast={setToast}
+            setMessage={setMessage}
+            id={id}
+            setPayment={setPayment}
+            setUpdates={setUpdates}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {isToast && <Toast text={message} setVisible={setToast} />}
       </AnimatePresence>
     </Transition>
   );

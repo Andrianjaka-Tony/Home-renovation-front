@@ -6,7 +6,7 @@ import Input from "../../../components/input";
 import Button from "../../../components/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-function Payment({ setPayment, setUpdates, id }) {
+function Payment({ setPayment, setUpdates, id, setToast, setMessage }) {
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
 
@@ -29,10 +29,14 @@ function Payment({ setPayment, setUpdates, id }) {
       .then((response) => response.json())
       .then((response) => {
         const { status, message, data } = response;
+        setToast(true);
         if (status == 200) {
           setUpdates((previous) => (previous += 1));
           setPayment(false);
+          setMessage("Paiement effectue avec succes.");
+          return;
         }
+        setMessage(message);
       });
   };
 

@@ -33,11 +33,11 @@ export const options = {
 
 function Histogram({ labels, values }) {
   const data = {
-    labels,
+    labels: ["", ...labels],
     datasets: [
       {
         label: "Histogramme",
-        data: values,
+        data: [0, ...values],
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

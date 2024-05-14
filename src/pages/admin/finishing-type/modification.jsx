@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Modal from "../../components/modal";
-import { api } from "../../helpers/api-helper";
-import Select from "../../components/select";
-import Input from "../../components/input";
-import Button from "../../components/button";
+import Modal from "../../../components/modal";
+import { api } from "../../../helpers/api-helper";
+import Select from "../../../components/select";
+import Input from "../../../components/input";
+import Button from "../../../components/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BiTrash } from "react-icons/bi";
 
@@ -20,7 +20,7 @@ function Modification({ modification, setModification, setUpdates }) {
       body: JSON.stringify({
         name,
         augmentation,
-        id: modification
+        id: modification,
       }),
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
@@ -64,6 +64,10 @@ function Modification({ modification, setModification, setUpdates }) {
       .then((response) => response.json())
       .then((response) => {
         const { status, message, data } = response;
+        const finishing = data["finishing-type"];
+        const { augmentation, name } = finishing;
+        setAugmentation(augmentation);
+        setName(name);
       });
   }, [modification]);
 
@@ -87,26 +91,18 @@ function Modification({ modification, setModification, setUpdates }) {
   return (
     <Modal closer={() => setModification(undefined)}>
       <form onSubmit={handleSubmit} className="form">
-        <h1 className="form-title">Modifier</h1>
+        <h1 className="form-title">Modifier {name}</h1>
         <p className="form-text">Modifier les champs</p>
-        <Input
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          type="text"
-          label="name"
-          required
-          id="name-input"
-        />
         <Input
           value={augmentation}
           onChange={(event) => setAugmentation(event.target.value)}
           type="text"
-          label="augmentation"
+          label="Augmentation"
           required
           id="augmentation-input"
         />
         <Button text="valider" icon={<AiOutlineArrowRight />} type="submit" />
-        <Button onClick={handleDelete} text="Supprimer" icon={<BiTrash />} type="button" />
+        {/* <Button onClick={handleDelete} text="Supprimer" icon={<BiTrash />} type="button" /> */}
       </form>
     </Modal>
   );

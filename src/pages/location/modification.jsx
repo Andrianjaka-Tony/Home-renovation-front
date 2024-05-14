@@ -5,20 +5,20 @@ import Select from "../../components/select";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { BiTrash } from "react-icons/bi";
 
-function Save({ setSave, setUpdates }) {
+function Modification({ modification, setModification, setUpdates }) {
   const [name, setName] = useState("");
-  const [augmentation, setAugmentation] = useState("");
 
   const [options, setOptions] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(`${api}/api/finishing-type/save`, {
-      method: "POST",
+    fetch(`${api}/api/location/update`, {
+      method: "PUT",
       body: JSON.stringify({
         name,
-        augmentation,
+        id: modification
       }),
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
@@ -30,13 +30,43 @@ function Save({ setSave, setUpdates }) {
         const { status, message, data } = response;
         if (status == 200) {
           setUpdates((previous) => (previous += 1));
-          setSave(false);
+          setModification(undefined);
         }
       });
   };
 
+  const handleDelete = () => {
+    fetch(`${api}/api/location/delete/${modification}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        const { status, message } = response;
+        if (status == 200) {
+          setUpdates((previous) => (previous += 1));
+          setModification(undefined);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetch(`${api}/api/location/${modification}`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        const { status, message, data } = response;
+      });
+  }, [modification]);
+
   // useEffect(() => {
-  //   fetch(`${api}/api/finishing-type/save`)
+  //   fetch(`${api}/api/ticket-sell/save`)
   //     .then((response) => response.json())
   //     .then((response) => {
   //       const { status, message, data } = response;
@@ -53,12 +83,10 @@ function Save({ setSave, setUpdates }) {
   // }, []);
 
   return (
-    <Modal closer={() => setSave(false)}>
+    <Modal closer={() => setModification(undefined)}>
       <form onSubmit={handleSubmit} className="form">
-        <h1 className="form-title">Sauvegarder</h1>
-        <p className="form-text">
-          Pour sauvegarder, remplir les champs ci-dessous
-        </p>
+        <h1 className="form-title">Modifier</h1>
+        <p className="form-text">Modifier les champs</p>
         <Input
           value={name}
           onChange={(event) => setName(event.target.value)}
@@ -67,18 +95,11 @@ function Save({ setSave, setUpdates }) {
           required
           id="name-input"
         />
-        <Input
-          value={augmentation}
-          onChange={(event) => setAugmentation(event.target.value)}
-          type="text"
-          label="augmentation"
-          required
-          id="augmentation-input"
-        />
         <Button text="valider" icon={<AiOutlineArrowRight />} type="submit" />
+        <Button onClick={handleDelete} text="Supprimer" icon={<BiTrash />} type="button" />
       </form>
     </Modal>
   );
 }
 
-export default Save;
+export default Modification;

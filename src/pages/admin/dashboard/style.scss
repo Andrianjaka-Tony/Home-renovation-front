@@ -1,14 +1,18 @@
 .admin-dashboard {
-  .admin-dashboard-price {
-    width: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    margin-block: 60px;
-    font-size: 48px;
+  .dashboard-header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 
-    span {
-      font-size: 16px;
+    .admin-dashboard-price {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin-block: 60px;
+      font-size: 48px;
+
+      span {
+        font-size: 16px;
+      }
     }
   }
 }

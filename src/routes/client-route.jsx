@@ -11,6 +11,10 @@ const items = [
     name: "Accueil",
     to: "./home",
   },
+  {
+    name: "Deconnexion",
+    to: "/",
+  },
 ];
 
 function ClientRoute() {

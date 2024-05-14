@@ -19,8 +19,10 @@
     grid-gap: 20px;
   }
 
-  .input {
+  .input,
+  .select {
     --input-color: #111;
+    --select-color: #111;
   }
 
   .client-contract-date {
@@ -30,7 +32,8 @@
     width: 100%;
     margin-bottom: 60px;
 
-    .input {
+    .input,
+    .select {
       width: 300px;
       margin-top: 30px;
       margin-bottom: 40px;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./style.scss";
 import Input from "../../../components/input";
+import Select from "../../../components/select";
 import Button from "../../../components/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { api } from "../../../helpers/api-helper";
@@ -18,9 +19,14 @@ function ClientContract() {
   const [house, setHouse] = useState("");
   const [finishing, setFinishing] = useState("");
   const [begin, setBegin] = useState("");
+  const [location, setLocation] = useState("");
 
   const [message, setMessage] = useState("");
   const [toast, setToast] = useState(false);
+
+  const [options, setOptions] = useState({
+    locations: [],
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,6 +36,7 @@ function ClientContract() {
         house: { id: house },
         finishingType: { id: finishing },
         client: { contact: sessionStorage.getItem("client-contact") },
+        location: { id: location },
         begin,
       }),
       headers: {
@@ -61,6 +68,21 @@ function ClientContract() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch(`${api}/api/locations`)
+      .then((response) => response.json())
+      .then((response) => {
+        const { data, status } = response;
+        if (status == 200) {
+          const { array } = data;
+          setOptions({
+            locations: array.map(({ id, name }) => ({ label: name, value: id })),
+          });
+          setLocation(array[0].id);
+        }
+      });
+  }, []);
+
   return (
     <Transition>
       <div className="client-contract page">
@@ -85,8 +107,8 @@ function ClientContract() {
             ))}
           </div>
           <div style={{ marginTop: "120px" }}></div>
-          <h2 className="client-contract-title">Debut des travaux</h2>
           <div className="client-contract-date">
+            <h2 className="client-contract-title">Debut des travaux</h2>
             <Input
               type="datetime-local"
               value={begin}
@@ -94,6 +116,13 @@ function ClientContract() {
               label="Date"
               required
               id="datetime-local-begin-input"
+            />
+            <h2 className="client-contract-title">Lieu des travaux</h2>
+            <Select
+              options={options.locations}
+              value={location}
+              onChange={(event) => setBegin(event.target.value)}
+              label="Date"
             />
             <Button type="submit" text="valider" icon={<AiOutlineArrowRight />} />
           </div>

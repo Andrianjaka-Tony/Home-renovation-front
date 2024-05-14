@@ -1,0 +1,28 @@
+.admin-import {
+  .admin-import-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    gap: 30px;
+
+    .file-input {
+      width: 400px;
+    }
+  }
+
+  .admin-import-nav {
+    display: flex;
+    width: 100%;
+    gap: 80px;
+    justify-content: center;
+    margin-top: 40px;
+    font-size: 24px;
+    cursor: pointer;
+
+    .non-active {
+      opacity: 0.3;
+    }
+  }
+}

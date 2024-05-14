@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { api } from "../../helpers/api-helper";
-import Pagination from "../../components/pagination";
+import { api } from "../../../helpers/api-helper";
+import Pagination from "../../../components/pagination";
+import { formatPrice } from "../../../helpers/price-format-helper";
 
 function list({ updates, setModification }) {
   const [items, setItems] = useState([]);
@@ -9,7 +10,7 @@ function list({ updates, setModification }) {
   const [page, setPage] = useState(1);
 
   const fetchItems = () => {
-    fetch(`${api}/api/finishing-types/${page}/8`, {
+    fetch(`${api}/api/works/${page}/8`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
@@ -34,16 +35,18 @@ function list({ updates, setModification }) {
     <>
       <div className="table">
         <div className="head">
-          <div className="column">id</div>
-          <div className="column">name</div>
-          <div className="column">augmentation</div>
+          <div className="column id">id</div>
+          <div className="column name">name</div>
+          <div className="column price">price</div>
+          <div className="column unit">price</div>
         </div>
         {items.length > 0 &&
           items.map((item, index) => (
             <div onClick={() => setModification(item.id)} className="row" key={index}>
-              <div className="column">{item.id}</div>
-              <div className="column">{item.name}</div>
-              <div className="column">{item.augmentation}</div>
+              <div className="column id">{item.id}</div>
+              <div className="column name">{item.name}</div>
+              <div className="column price">{formatPrice(item.price)} Ar</div>
+              <div className="column unit">{item.unit.name}</div>
             </div>
           ))}
       </div>

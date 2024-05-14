@@ -9,7 +9,7 @@ function list({ updates, setModification }) {
   const [page, setPage] = useState(1);
 
   const fetchItems = () => {
-    fetch(`${api}/api/works/${page}/8`, {
+    fetch(`${api}/api/locations/${page}/8`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
@@ -36,14 +36,12 @@ function list({ updates, setModification }) {
         <div className="head">
           <div className="column">id</div>
           <div className="column">name</div>
-          <div className="column">price</div>
         </div>
         {items.length > 0 &&
           items.map((item, index) => (
             <div onClick={() => setModification(item.id)} className="row" key={index}>
               <div className="column">{item.id}</div>
               <div className="column">{item.name}</div>
-              <div className="column">{item.price}</div>
             </div>
           ))}
       </div>

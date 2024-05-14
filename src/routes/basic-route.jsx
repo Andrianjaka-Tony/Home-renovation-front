@@ -10,7 +10,7 @@ const Redirect = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/sign-in");
+    navigate("/sign-in-client");
   }, []);
 
   return null;

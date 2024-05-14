@@ -5,24 +5,18 @@ import Select from "../../components/select";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { BiTrash } from "react-icons/bi";
 
-function Modification({ modification, setModification, setUpdates }) {
+function Save({ setSave, setUpdates }) {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [unit, setUnit] = useState("");
 
   const [options, setOptions] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(`${api}/api/work/update`, {
-      method: "PUT",
+    fetch(`${api}/api/location/save`, {
+      method: "POST",
       body: JSON.stringify({
         name,
-        price,
-        unit: { id: unit },
-        id: modification
       }),
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
@@ -34,43 +28,13 @@ function Modification({ modification, setModification, setUpdates }) {
         const { status, message, data } = response;
         if (status == 200) {
           setUpdates((previous) => (previous += 1));
-          setModification(undefined);
+          setSave(false);
         }
       });
   };
-
-  const handleDelete = () => {
-    fetch(`${api}/api/work/delete/${modification}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        const { status, message } = response;
-        if (status == 200) {
-          setUpdates((previous) => (previous += 1));
-          setModification(undefined);
-        }
-      });
-  };
-
-  useEffect(() => {
-    fetch(`${api}/api/work/${modification}`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("storage-token")}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        const { status, message, data } = response;
-      });
-  }, [modification]);
 
   // useEffect(() => {
-  //   fetch(`${api}/api/ticket-sell/save`)
+  //   fetch(`${api}/api/location/save`)
   //     .then((response) => response.json())
   //     .then((response) => {
   //       const { status, message, data } = response;
@@ -87,10 +51,12 @@ function Modification({ modification, setModification, setUpdates }) {
   // }, []);
 
   return (
-    <Modal closer={() => setModification(undefined)}>
+    <Modal closer={() => setSave(false)}>
       <form onSubmit={handleSubmit} className="form">
-        <h1 className="form-title">Modifier</h1>
-        <p className="form-text">Modifier les champs</p>
+        <h1 className="form-title">Sauvegarder</h1>
+        <p className="form-text">
+          Pour sauvegarder, remplir les champs ci-dessous
+        </p>
         <Input
           value={name}
           onChange={(event) => setName(event.target.value)}
@@ -99,27 +65,10 @@ function Modification({ modification, setModification, setUpdates }) {
           required
           id="name-input"
         />
-        <Input
-          value={price}
-          onChange={(event) => setPrice(event.target.value)}
-          type="text"
-          label="price"
-          required
-          id="price-input"
-        />
-        <Input
-          value={unit}
-          onChange={(event) => setUnit(event.target.value)}
-          type="text"
-          label="unit"
-          required
-          id="unit-input"
-        />
         <Button text="valider" icon={<AiOutlineArrowRight />} type="submit" />
-        <Button onClick={handleDelete} text="Supprimer" icon={<BiTrash />} type="button" />
       </form>
     </Modal>
   );
 }
 
-export default Modification;
+export default Save;
