@@ -13,7 +13,7 @@ const items = [
   },
   {
     name: "Deconnexion",
-    to: "/",
+    to: "/sign-out",
   },
 ];
 

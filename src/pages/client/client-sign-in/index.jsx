@@ -54,9 +54,9 @@ function SignInClient() {
           required
         />
         <Button text="Connexion" icon={<AiOutlineArrowRight />} type="submit" />
-        <Link to={"/sign-in"} className="form-link">
+        {/* <Link to={"/sign-in"} className="form-link">
           Je suis administrateur
-        </Link>
+        </Link> */}
       </form>
 
       <AnimatePresence mode="wait">

@@ -5,6 +5,7 @@ import AdminRoute from "./admin-route";
 import SignInClient from "../pages/client/client-sign-in";
 import ClientRoute from "./client-route";
 import { AnimatePresence } from "framer-motion";
+import SIgnOut from "../pages/sign-out";
 
 const Redirect = () => {
   const navigate = useNavigate();
@@ -24,8 +25,9 @@ function BasicRoute() {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Redirect />} />
-          <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-in-client" element={<SignInClient />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-out" element={<SIgnOut />} />
           <Route path="/admin/*" element={<AdminRoute />} />
           <Route path="/client/*" element={<ClientRoute />} />
         </Routes>

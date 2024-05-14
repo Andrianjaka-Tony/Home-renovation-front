@@ -6,8 +6,11 @@ import { api } from "../../../helpers/api-helper";
 import { useParams } from "react-router-dom";
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
+import useAdmin from "../../../hooks/useAdmin";
 
 function ContractById() {
+  useAdmin();
+
   const { id } = useParams();
 
   const [contract, setContract] = useState(undefined);

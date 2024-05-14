@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
+import useAdmin from "../../../hooks/useAdmin";
 
 function Home() {
+  useAdmin();
+
   const navigate = useNavigate();
 
   const [items, setItems] = useState([]);

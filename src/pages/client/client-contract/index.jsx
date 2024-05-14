@@ -11,8 +11,11 @@ import Toast from "../../../components/toast";
 import Transition from "../../../components/transition";
 import HouseCard from "./house-card";
 import FinishingCard from "./finishing-card";
+import useClient from "../../../hooks/useClient";
 
 function ClientContract() {
+  useClient();
+
   const [houses, setHouses] = useState([]);
   const [finishings, setFinishings] = useState([]);
 

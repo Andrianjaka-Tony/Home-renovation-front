@@ -66,9 +66,9 @@ function SignIn() {
           required
         />
         <Button text="Connexion" icon={<AiOutlineArrowRight />} type="submit" />
-        <Link to={"/sign-in-client"} className="form-link">
+        {/* <Link to={"/sign-in-client"} className="form-link">
           Je suis un client
-        </Link>
+        </Link> */}
       </form>
 
       <AnimatePresence mode="wait">

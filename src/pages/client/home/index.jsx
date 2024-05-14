@@ -10,8 +10,11 @@ import Toast from "../../../components/toast";
 import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
+import useClient from "../../../hooks/useClient";
 
 function ClientHome() {
+  useClient();
+
   const navigate = useNavigate();
 
   const [items, setItems] = useState([]);

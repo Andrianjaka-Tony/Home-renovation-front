@@ -6,12 +6,17 @@ import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import Histogram from "./histogram";
+import useAdmin from "../../../hooks/useAdmin";
 
 function Dashboard() {
+  useAdmin();
+
   const [labels, setLabels] = useState([]);
   const [datas, setDatas] = useState([]);
   const [price, setPrice] = useState(0);
   const [payment, setPayment] = useState(0);
+  const [years, setYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
 
   useEffect(() => {
     fetch(`${api}/api/admin/dashboard`)
@@ -19,14 +24,29 @@ function Dashboard() {
       .then((response) => {
         const { status, data } = response;
         if (status == 200) {
-          const { histogram, price, payment } = data;
-          setDatas(histogram.map(({ price }) => price));
-          setLabels(histogram.map(({ date }) => date));
+          const { years, price, payment } = data;
+          // setDatas(histogram.map(({ price }) => price));
+          // setLabels(histogram.map(({ date }) => date));
+          setYears(years);
           setPrice(price);
           setPayment(payment);
+          setSelectedYear(years[0]);
         }
       });
   }, []);
+
+  useEffect(() => {
+    fetch(`${api}/api/admin/dashboard/${selectedYear}`)
+      .then((response) => response.json())
+      .then((response) => {
+        const { status, data } = response;
+        if (status == 200) {
+          const { histogram } = data;
+          setDatas(histogram.map(({ price }) => price));
+          setLabels(histogram.map(({ date }) => date));
+        }
+      });
+  }, [selectedYear]);
 
   return (
     <>
@@ -42,6 +62,17 @@ function Dashboard() {
               {formatPrice(payment)}Ar
               <span>Paiement total des clients</span>
             </div>
+          </div>
+          <div className="year-nav">
+            {years.map((year) => (
+              <p
+                className={`${selectedYear == year ? "active" : ""}`}
+                key={year}
+                onClick={() => setSelectedYear(year)}
+              >
+                {year}
+              </p>
+            ))}
           </div>
           <div className="admin-dashboard-graphic">
             <Histogram labels={labels} values={datas} />

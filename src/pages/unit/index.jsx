@@ -7,8 +7,11 @@ import Transition from "../../components/transition";
 import List from "./list";
 import Save from "./save";
 import Modification from "./modification";
+import useAdmin from "../../hooks/useAdmin";
 
 function Unit() {
+  useAdmin();
+
   const [updates, setUpdates] = useState(0);
   const [isSave, setSave] = useState(false);
   const [modification, setModification] = useState(undefined);

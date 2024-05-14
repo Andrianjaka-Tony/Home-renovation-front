@@ -15,4 +15,22 @@
       }
     }
   }
+
+  .year-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-block: 20px 50px;
+
+    p {
+      font-size: 18px;
+      opacity: 0.4;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
 }

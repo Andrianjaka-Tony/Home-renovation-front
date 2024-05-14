@@ -8,6 +8,7 @@ import Menu from "../components/menu";
 import FileImport from "../pages/admin/file-import";
 import FinishingType from "../pages/admin/finishing-type";
 import Work from "../pages/admin/work";
+import Reset from "../pages/admin/reset";
 
 function AdminRoute() {
   const location = useLocation();
@@ -34,8 +35,12 @@ function AdminRoute() {
       to: "./work",
     },
     {
+      name: "Reinitialiser",
+      to: "./reset",
+    },
+    {
       name: "Deconnexion",
-      to: "/",
+      to: "/sign-out",
     },
   ];
 
@@ -50,6 +55,7 @@ function AdminRoute() {
         <Route path="/file-import" element={<FileImport />} />
         <Route path="/finishing" element={<FinishingType />} />
         <Route path="/work" element={<Work />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
     </>
   );

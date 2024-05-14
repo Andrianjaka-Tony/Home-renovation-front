@@ -6,15 +6,23 @@ import { useNavigate } from "react-router-dom";
 import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
 import Transition from "../../../components/transition";
 import Button from "../../../components/button";
+import Toast from "../../../components/toast";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import { AiOutlineUpload } from "react-icons/ai";
+import useAdmin from "../../../hooks/useAdmin";
+import { AnimatePresence } from "framer-motion";
 
 function FileImport() {
+  useAdmin();
+
   const [page, setPage] = useState("1");
 
   const [houseWork, setHouseWork] = useState("");
   const [contract, setContract] = useState("");
   const [payment, setPayment] = useState("");
+
+  const [message, setMessage] = useState("");
+  const [isToast, setToast] = useState(false);
 
   const handleChange = (event, setter) => {
     const { target } = event;
@@ -40,6 +48,8 @@ function FileImport() {
       .then((response) => response.json())
       .then((response) => {
         const { status, message } = response;
+        setMessage(message);
+        setToast(true);
       });
   };
 
@@ -55,6 +65,8 @@ function FileImport() {
       .then((response) => response.json())
       .then((response) => {
         const { status, message } = response;
+        setMessage(message);
+        setToast(true);
       });
   };
 
@@ -62,10 +74,10 @@ function FileImport() {
     <div className="admin-import page">
       <div className="page-title">Import de fichiers</div>
       <nav className="admin-import-nav">
-        <p className={page != 1 && "non-active"} onClick={() => setPage(1)}>
+        <p className={page != 1 ? "non-active" : ""} onClick={() => setPage(1)}>
           Maisons et devis
         </p>
-        <p className={page != 2 && "non-active"} onClick={() => setPage(2)}>
+        <p className={page != 2 ? "non-active" : ""} onClick={() => setPage(2)}>
           Paiements
         </p>
       </nav>
@@ -96,6 +108,9 @@ function FileImport() {
           <Button text="Import" icon={<AiOutlineUpload />} type="submit" />
         </form>
       )}
+      <AnimatePresence mode="wait">
+        {isToast && <Toast text={message} setVisible={setToast} />}
+      </AnimatePresence>
     </div>
   );
 }

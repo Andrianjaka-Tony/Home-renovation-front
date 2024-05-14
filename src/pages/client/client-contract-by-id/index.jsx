@@ -17,8 +17,11 @@ import Transition from "../../../components/transition";
 import Payment from "./payement";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import { Resolution, usePDF } from "react-to-pdf";
+import useClient from "../../../hooks/useClient";
 
 function ClientContactById() {
+  useClient();
+
   const { id } = useParams();
 
   const { toPDF, targetRef: ref } = usePDF({
