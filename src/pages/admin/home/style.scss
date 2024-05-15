@@ -20,6 +20,14 @@
   }
 
   .table {
+    .row.green {
+      color: green;
+    }
+
+    .row.red {
+      color: red;
+    }
+
     .column.date {
       min-width: initial;
       width: 200px;

@@ -86,7 +86,13 @@ function Home() {
               <div className="column augmentation">Augmentation</div>
             </div>
             {items.map((item) => (
-              <div onClick={() => navigate(`../contract/${item.id}`)} key={item.id} className="row">
+              <div
+                onClick={() => navigate(`../contract/${item.id}`)}
+                key={item.id}
+                className={`${(item.payed / item.price) * 100 > 50 ? "green" : ""} ${
+                  (item.payed / item.price) * 100 < 50 ? "red" : ""
+                } row`}
+              >
                 <div className="column date">{item.client.contact}</div>
                 <div className="column date">{formatDate(item.date)}</div>
                 <div className="column timestamp">{formatTimestamp(item.begin)}</div>

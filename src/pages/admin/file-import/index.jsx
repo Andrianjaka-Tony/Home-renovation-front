@@ -99,7 +99,7 @@ function FileImport() {
             label={contractLabel}
             onChange={(event) => handleChange(event, setContract, setContractLabel)}
           />
-          <Button text="Import" icon={<AiOutlineUpload />} type="submit" />
+          <Button text="Importer" icon={<AiOutlineUpload />} type="submit" />
         </form>
       )}
       {page == 2 && (
@@ -110,7 +110,7 @@ function FileImport() {
             label={payementLabel}
             onChange={(event) => handleChange(event, setPayment, setPaymentLabel)}
           />
-          <Button text="Import" icon={<AiOutlineUpload />} type="submit" />
+          <Button text="Importer" icon={<AiOutlineUpload />} type="submit" />
         </form>
       )}
       <AnimatePresence mode="wait">
