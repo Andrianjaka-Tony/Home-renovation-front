@@ -124,7 +124,7 @@ function ClientContract() {
             <Select
               options={options.locations}
               value={location}
-              onChange={(event) => setBegin(event.target.value)}
+              onChange={(event) => setLocation(event.target.value)}
               label="Date"
             />
             <Button type="submit" text="valider" icon={<AiOutlineArrowRight />} />

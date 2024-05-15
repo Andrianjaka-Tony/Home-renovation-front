@@ -32,7 +32,20 @@ function Histogram({ labels, values }) {
       {
         label: "Montant des devis",
         data: values,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: [
+          "#111",
+          "#5758BB",
+          "#1289A7",
+          "#FFC312",
+          "#B53471",
+          "#4b6584",
+          "#3867d6",
+          "#0fb9b1",
+          "#8854d0",
+          "#aaa69d",
+          "#2c2c54",
+          "#34ace0",
+        ],
       },
     ],
   };

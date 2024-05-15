@@ -24,14 +24,19 @@ function FileImport() {
   const [message, setMessage] = useState("");
   const [isToast, setToast] = useState(false);
 
-  const handleChange = (event, setter) => {
+  const [houseWorkLabel, setHouseWorkLabel] = useState("Importer votre fichier house-work");
+  const [contractLabel, setContractLabel] = useState("Importer votre fichier de devis");
+  const [payementLabel, setPaymentLabel] = useState("Importer votre fichier de paiement");
+
+  const handleChange = (event, setter, setLabel) => {
     const { target } = event;
     const [file] = target.files;
-    // const { name, size } = file;
+    const { name, size } = file;
     const reader = new FileReader();
     reader.addEventListener("load", (event) => {
       const { result } = event.target;
       setter(result);
+      setLabel(name);
     });
     reader.readAsDataURL(file);
   };
@@ -86,13 +91,13 @@ function FileImport() {
           <div className="admin-import-form-title">Importer les fichiers de maison et de devis</div>
           <FileInput
             id="house-work-input"
-            label="Importer votre fichier house-work"
-            onChange={(event) => handleChange(event, setHouseWork)}
+            label={houseWorkLabel}
+            onChange={(event) => handleChange(event, setHouseWork, setHouseWorkLabel)}
           />
           <FileInput
             id="contract-input"
-            label="Importer votre fichier de devis"
-            onChange={(event) => handleChange(event, setContract)}
+            label={contractLabel}
+            onChange={(event) => handleChange(event, setContract, setContractLabel)}
           />
           <Button text="Import" icon={<AiOutlineUpload />} type="submit" />
         </form>
@@ -102,8 +107,8 @@ function FileImport() {
           <div className="admin-import-form-title">Importer le fichier de paiement</div>
           <FileInput
             id="house-work-input"
-            label="Importer votre fichier de paiement"
-            onChange={(event) => handleChange(event, setPayment)}
+            label={payementLabel}
+            onChange={(event) => handleChange(event, setPayment, setPaymentLabel)}
           />
           <Button text="Import" icon={<AiOutlineUpload />} type="submit" />
         </form>
