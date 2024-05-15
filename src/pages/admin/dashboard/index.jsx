@@ -7,6 +7,7 @@ import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import Histogram from "./histogram";
 import useAdmin from "../../../hooks/useAdmin";
+import fillHistogram from "../../../helpers/fill-histogram-helper";
 
 function Dashboard() {
   useAdmin();
@@ -25,8 +26,6 @@ function Dashboard() {
         const { status, data } = response;
         if (status == 200) {
           const { years, price, payment } = data;
-          // setDatas(histogram.map(({ price }) => price));
-          // setLabels(histogram.map(({ date }) => date));
           setYears(years);
           setPrice(price);
           setPayment(payment);
@@ -41,7 +40,8 @@ function Dashboard() {
       .then((response) => {
         const { status, data } = response;
         if (status == 200) {
-          const { histogram } = data;
+          let { histogram } = data;
+          histogram = fillHistogram(histogram);
           setDatas(histogram.map(({ price }) => price));
           setLabels(histogram.map(({ date }) => date));
         }

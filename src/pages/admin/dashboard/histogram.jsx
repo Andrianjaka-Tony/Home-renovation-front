@@ -3,15 +3,14 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const options = {
   responsive: true,
@@ -21,30 +20,24 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Histogram",
-    },
-  },
-  elements: {
-    line: {
-      tension: 0.3,
+      text: "Histogramme",
     },
   },
 };
 
 function Histogram({ labels, values }) {
   const data = {
-    labels: ["", ...labels],
+    labels,
     datasets: [
       {
-        label: "Histogramme",
-        data: [0, ...values],
-        borderColor: "rgb(255, 99, 132)",
+        label: "Montant des devis",
+        data: values,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Bar options={options} data={data} />;
 }
 
 export default Histogram;

@@ -20,7 +20,7 @@ function AdminRoute() {
     },
     {
       name: "Devis",
-      to: "./home",
+      to: "./contract",
     },
     {
       name: "Import",
@@ -49,7 +49,7 @@ function AdminRoute() {
       <Menu items={items} />
       <Routes location={location} key={location.pathname}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/contract" element={<Home />} />
         <Route path="/units" element={<Unit />} />
         <Route path="/contract/:id" element={<ContractById />} />
         <Route path="/file-import" element={<FileImport />} />
