@@ -2,7 +2,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { formatPrice } from "../../../../helpers/price-format-helper";
 import "./style.scss";
 
-function HouseCard({ id, name, description, duration, price, house, setHouse }) {
+function HouseCard({ id, name, description, duration, price, house, setHouse, area }) {
   return (
     <div onClick={() => setHouse(id)} is-active={`${id == house}`} className="house-card">
       <div>
@@ -19,6 +19,13 @@ function HouseCard({ id, name, description, duration, price, house, setHouse }) 
             <p className="value">
               {duration}
               <span>jour{"(s)"}</span>
+            </p>
+          </div>
+          <div className="house-card-item">
+            <div className="label">Surface</div>
+            <p className="value">
+              {area}
+              <span>m2</span>
             </p>
           </div>
           <div className="house-card-item">
