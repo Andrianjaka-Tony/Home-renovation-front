@@ -1,0 +1,63 @@
+.contract-pdf-format {
+  width: 100%;
+  padding: 40px;
+
+  .pdf-section {
+    display: flex;
+
+    p {
+      padding-inline: 10px;
+    }
+
+    .designation {
+      width: 40%;
+    }
+
+    .unit,
+    .quantity {
+      width: 10%;
+      text-align: center;
+    }
+
+    .price,
+    .total {
+      width: 20%;
+      text-align: center;
+    }
+  }
+
+  .pdf-header {
+    border-bottom: 1px solid black;
+    padding-block: 5px;
+    text-transform: uppercase;
+  }
+
+  .pdf-body {
+    margin-top: 15px;
+  }
+
+  .pdf-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 40px;
+    gap: 15px;
+
+    .pdf-resume {
+      display: flex;
+      justify-content: space-between;
+      width: 30%;
+      align-items: flex-end;
+
+      .label {
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      .value {
+        font-size: 28px;
+      }
+    }
+  }
+}

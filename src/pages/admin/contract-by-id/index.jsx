@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import useAdmin from "../../../hooks/useAdmin";
+import ContractPdfFormat from "../../contract-pdf-format";
 
 function ContractById() {
   useAdmin();
@@ -59,38 +60,39 @@ function ContractById() {
         </div>
       </div>
       {contract && (
-        <div className="client-contract-by-id-pdf">
-          <div className="pdf-section pdf-header">
-            <p className="designation">Designation</p>
-            <p className="unit">Unite</p>
-            <p className="quantity">Quantite</p>
-            <p className="price">Prix unitaire</p>
-            <p className="total">Total</p>
-          </div>
-          {contract.details.map(({ id, quantity, unitPrice, unit, work }) => (
-            <div key={id} className="pdf-section pdf-body">
-              <p className="designation">{work.name}</p>
-              <p className="unit">{unit.name}</p>
-              <p className="quantity">{quantity}</p>
-              <p className="price">{formatPrice(unitPrice)} Ar</p>
-              <p className="total">{formatPrice(quantity * unitPrice)}</p>
-            </div>
-          ))}
-          <div className="pdf-bottom">
-            <div className="pdf-resume">
-              <p className="label">Augmentation de finition</p>
-              <p className="value">{contract.finishingAugmentation}%</p>
-            </div>
-            <div className="pdf-resume">
-              <p className="label">Prix</p>
-              <p className="value">{formatPrice(totalPrice())} Ar</p>
-            </div>
-            <div className="pdf-resume">
-              <p className="label">Prix total</p>
-              <p className="value">{formatPrice(contract.price)} Ar</p>
-            </div>
-          </div>
-        </div>
+        // <div className="client-contract-by-id-pdf">
+        //   <div className="pdf-section pdf-header">
+        //     <p className="designation">Designation</p>
+        //     <p className="unit">Unite</p>
+        //     <p className="quantity">Quantite</p>
+        //     <p className="price">Prix unitaire</p>
+        //     <p className="total">Total</p>
+        //   </div>
+        //   {contract.details.map(({ id, quantity, unitPrice, unit, work }) => (
+        //     <div key={id} className="pdf-section pdf-body">
+        //       <p className="designation">{work.name}</p>
+        //       <p className="unit">{unit.name}</p>
+        //       <p className="quantity">{quantity}</p>
+        //       <p className="price">{formatPrice(unitPrice)} Ar</p>
+        //       <p className="total">{formatPrice(quantity * unitPrice)}</p>
+        //     </div>
+        //   ))}
+        //   <div className="pdf-bottom">
+        //     <div className="pdf-resume">
+        //       <p className="label">Augmentation de finition</p>
+        //       <p className="value">{contract.finishingAugmentation}%</p>
+        //     </div>
+        //     <div className="pdf-resume">
+        //       <p className="label">Prix</p>
+        //       <p className="value">{formatPrice(totalPrice())} Ar</p>
+        //     </div>
+        //     <div className="pdf-resume">
+        //       <p className="label">Prix total</p>
+        //       <p className="value">{formatPrice(contract.price)} Ar</p>
+        //     </div>
+        //   </div>
+        // </div>
+        <ContractPdfFormat contract={contract} />
       )}
     </Transition>
   );
