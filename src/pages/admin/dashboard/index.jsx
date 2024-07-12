@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import "./style.scss";
 import { api } from "../../../helpers/api-helper";
-import { useNavigate } from "react-router-dom";
-import { formatDate, formatTimestamp } from "../../../helpers/date-format-helper";
-import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import Histogram from "./histogram";
 import useAdmin from "../../../hooks/useAdmin";
 import fillHistogram from "../../../helpers/fill-histogram-helper";
+import setPageHead from "../../../helpers/page-helper";
 
 function Dashboard() {
   useAdmin();
@@ -48,37 +46,43 @@ function Dashboard() {
       });
   }, [selectedYear]);
 
+  useEffect(() => {
+    setPageHead({
+      title: "Dashboard Home Renovation",
+      description: "Page pour le tableau de bord administrateur de l'application Home Renovation.",
+    });
+  }, []);
+
   return (
     <>
-      <Transition>
-        <div className="admin-dashboard page">
-          <div className="page-title">Dashboard</div>
-          <div className="dashboard-header">
-            <div className="admin-dashboard-price">
-              {formatPrice(price)}Ar
-              <span>Prix total des devis</span>
-            </div>
-            <div className="admin-dashboard-price">
-              {formatPrice(payment)}Ar
-              <span>Paiement total des clients</span>
-            </div>
+      {/* <Transition /> */}
+      <div className="admin-dashboard page">
+        <div className="page-title">Dashboard</div>
+        <div className="dashboard-header">
+          <div className="admin-dashboard-price">
+            {formatPrice(price)}Ar
+            <span>Prix total des devis</span>
           </div>
-          <div className="year-nav">
-            {years.map((year) => (
-              <p
-                className={`${selectedYear == year ? "active" : ""}`}
-                key={year}
-                onClick={() => setSelectedYear(year)}
-              >
-                {year}
-              </p>
-            ))}
-          </div>
-          <div className="admin-dashboard-graphic">
-            <Histogram labels={labels} values={datas} />
+          <div className="admin-dashboard-price">
+            {formatPrice(payment)}Ar
+            <span>Paiement total des clients</span>
           </div>
         </div>
-      </Transition>
+        <div className="year-nav">
+          {years.map((year) => (
+            <p
+              className={`${selectedYear == year ? "active" : ""}`}
+              key={year}
+              onClick={() => setSelectedYear(year)}
+            >
+              {year}
+            </p>
+          ))}
+        </div>
+        <div className="admin-dashboard-graphic">
+          <Histogram labels={labels} values={datas} />
+        </div>
+      </div>
     </>
   );
 }

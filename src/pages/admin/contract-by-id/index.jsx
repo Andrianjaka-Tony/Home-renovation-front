@@ -8,6 +8,8 @@ import Transition from "../../../components/transition";
 import { formatPrice } from "../../../helpers/price-format-helper";
 import useAdmin from "../../../hooks/useAdmin";
 import ContractPdfFormat from "../../contract-pdf-format";
+import setPageHead from "../../../helpers/page-helper";
+import { formatDate } from "../../../helpers/date-format-helper";
 
 function ContractById() {
   useAdmin();
@@ -31,6 +33,12 @@ function ContractById() {
         const { status, data } = response;
         if (status == 200) {
           const { contract } = data;
+          setPageHead({
+            title: `${contract.house.name} - ${contract.date}`,
+            description: `Devis pour le type de maison << ${
+              contract.house.name
+            } >> signé le ${formatDate(contract.date)}`,
+          });
           setContract(contract);
         }
       });

@@ -34,14 +34,14 @@ function list({ updates, setModification }) {
     <>
       <div className="table">
         <div className="head">
-          <div className="column id">id</div>
+          {/* <div className="column id">id</div> */}
           <div className="column name">name</div>
           <div className="column augmentation">augmentation</div>
         </div>
         {items.length > 0 &&
           items.map((item, index) => (
             <div onClick={() => setModification(item.id)} className="row" key={index}>
-              <div className="column id">{item.id}</div>
+              {/* <div className="column id">{item.id}</div> */}
               <div className="column name">{item.name}</div>
               <div className="column augmentation">{item.augmentation}%</div>
             </div>

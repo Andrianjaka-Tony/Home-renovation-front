@@ -12,6 +12,7 @@ import Transition from "../../../components/transition";
 import HouseCard from "./house-card";
 import FinishingCard from "./finishing-card";
 import useClient from "../../../hooks/useClient";
+import setPageHead from "../../../helpers/page-helper";
 
 function ClientContract() {
   useClient();
@@ -84,6 +85,13 @@ function ClientContract() {
           setLocation(array[0].id);
         }
       });
+  }, []);
+
+  useEffect(() => {
+    setPageHead({
+      title: "Effectuer un nouveau devis",
+      description: "Pour effectuer un nouveau devis, remplissez les criteres ci-dessous.",
+    });
   }, []);
 
   return (

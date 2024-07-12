@@ -14,12 +14,12 @@ export const itemsVariants = {
     },
   },
   exit: {
-    scale: 0,
-    borderRadius: "50%",
+    opacity: 0,
+    // borderRadius: "50%",
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: [0.55, 0.73, 0.06, 0.94],
-      delay: 0.8,
+      // delay: 0.8,
     },
   },
 };

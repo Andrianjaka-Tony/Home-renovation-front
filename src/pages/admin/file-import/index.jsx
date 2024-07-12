@@ -11,6 +11,7 @@ import { formatPrice } from "../../../helpers/price-format-helper";
 import { AiOutlineUpload } from "react-icons/ai";
 import useAdmin from "../../../hooks/useAdmin";
 import { AnimatePresence } from "framer-motion";
+import setPageHead from "../../../helpers/page-helper";
 
 function FileImport() {
   useAdmin();
@@ -74,6 +75,13 @@ function FileImport() {
         setToast(true);
       });
   };
+
+  useEffect(() => {
+    setPageHead({
+      title: "Importation de fichiers CSV",
+      description: "Page pour importer les fichiers de données CSV.",
+    });
+  }, []);
 
   return (
     <div className="admin-import page">

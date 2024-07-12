@@ -19,6 +19,7 @@ import { formatPrice } from "../../../helpers/price-format-helper";
 import { Resolution, usePDF } from "react-to-pdf";
 import useClient from "../../../hooks/useClient";
 import ContractPdfFormat from "../../contract-pdf-format";
+import setPageHead from "../../../helpers/page-helper";
 
 function ClientContactById() {
   useClient();
@@ -53,6 +54,12 @@ function ClientContactById() {
         const { status, data } = response;
         if (status == 200) {
           const { contract } = data;
+          setPageHead({
+            title: `${contract.house.name} - ${contract.date}`,
+            description: `Devis pour le type de maison << ${
+              contract.house.name
+            } >> signé le ${formatDate(contract.date)}`,
+          });
           setContract(contract);
         }
       });

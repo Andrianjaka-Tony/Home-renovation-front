@@ -12,6 +12,10 @@ const items = [
     to: "./home",
   },
   {
+    name: "Devis",
+    to: "./contract",
+  },
+  {
     name: "Deconnexion",
     to: "/sign-out",
   },

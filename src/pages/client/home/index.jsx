@@ -13,6 +13,7 @@ import { formatPrice } from "../../../helpers/price-format-helper";
 import useClient from "../../../hooks/useClient";
 import { FaEye } from "react-icons/fa";
 import PdfPreview from "./pdf-preview";
+import setPageHead from "../../../helpers/page-helper";
 
 function ClientHome() {
   useClient();
@@ -46,6 +47,13 @@ function ClientHome() {
         }
       });
   };
+
+  useEffect(() => {
+    setPageHead({
+      title: "Mes devis",
+      description: "Voici la liste de vos devis enregistrés.",
+    });
+  }, []);
 
   return (
     <>

@@ -12,6 +12,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 import { AnimatePresence } from "framer-motion";
 import useAdmin from "../../../hooks/useAdmin";
+import setPageHead from "../../../helpers/page-helper";
 
 function Reset() {
   useAdmin();
@@ -30,6 +31,13 @@ function Reset() {
         }
       });
   };
+
+  useEffect(() => {
+    setPageHead({
+      title: "Réinitialiser la base de données",
+      description: "Page permettant de réinitialiser la base de données",
+    });
+  }, []);
 
   return (
     <div className="reset-admin page">

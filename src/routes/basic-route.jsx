@@ -22,7 +22,7 @@ function BasicRoute() {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Redirect />} />
           <Route path="/sign-in-client" element={<SignInClient />} />

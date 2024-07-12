@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.scss";
 import Input from "../../components/input";
 import Button from "../../components/button";
@@ -7,6 +7,7 @@ import { api } from "../../helpers/api-helper";
 import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Toast from "../../components/toast";
+import setPageHead from "../../helpers/page-helper";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -42,6 +43,13 @@ function SignIn() {
         }
       });
   };
+
+  useEffect(() => {
+    setPageHead({
+      title: "Connexion administrateur Home Renovation",
+      description: "Ceci est la page de connexion pour les administrateus de Home Renovation",
+    });
+  }, []);
 
   return (
     <div className="sign-in">
